@@ -21,31 +21,31 @@ Parameters:
 Mappings:
   EnvironmentMap:
     dev:
-      LINEOAChannelId: LINEOAChannelId
-      LIFFChannelId: LIFFChannelId
-      LIFFId: LIFFId
-      MembersInfoDBName: MembersInfoDBNameDev
-      ProductInfoDBName: ProductInfoDBNameDev
-      LINEChannelAccessTokenDBName: MembersCardChannelAccessTokenDBDev
-      FrontS3BucketName: S3 Name for FrontEnd
-      LayerVersion: Layer Version
-      LambdaMemorySize: 128 to 3008
-      LoggerLevel: DEBUG or INFO
+      LINEOAChannelId: 2006175823
+      LIFFChannelId: 2006175866
+      LIFFId: 2006175866-5PDdy9xY
+      MembersInfoDBName: LineAppMemberInfoDB
+      ProductInfoDBName: LineAppProductInfoDB
+      LINEChannelAccessTokenDBName: LineChannelAccessDBDev
+      FrontS3BucketName: lineapps3bucket
+      LayerVersion: 6
+      LambdaMemorySize: 128
+      LoggerLevel: DEBUG
       # ### ACCESS LOG SETTING ###
       # LogS3Bucket: S3 Name for AccessLogFile
       # LogFilePrefix: memberscard-sample/
       # ### ACCESS LOG SETTING ###
     prod:
-      LINEOAChannelId: LINEOAChannelId
-      LIFFChannelId: LIFFChannelId
-      LIFFId: LIFFId
-      MembersInfoDBName: MembersInfoDBNameProd
-      ProductInfoDBName: ProductInfoDBNameProd
-      LINEChannelAccessTokenDBName: MembersCardChannelAccessTokenDBProd
-      FrontS3BucketName: S3 Name for FrontEnd
-      LayerVersion: Layer Version
-      LambdaMemorySize: 128 to 3008
-      LoggerLevel: DEBUG or INFO
+      LINEOAChannelId: 2006175823
+      LIFFChannelId: 2006175866
+      LIFFId: 2006175866-5PDdy9xY
+      MembersInfoDBName: LineAppMemberInfoDBProd
+      ProductInfoDBName: LineAppProductInfoDBProd
+      LINEChannelAccessTokenDBName: LineChannelAccessDBDevProd
+      FrontS3BucketName: lineapps3bucket
+      LayerVersion: 6
+      LambdaMemorySize: 128
+      LoggerLevel: DEBUG
       # ### ACCESS LOG SETTING ###
       # LogS3Bucket: S3 Name for AccessLogFile
       # LogFilePrefix: memberscard-sample/
@@ -299,7 +299,7 @@ Resources:
               Bool:
                 "aws:SecureTransport": "true"
           - Action: s3:*
-            Sid: 2
+            Sid: 3
             Effect: Deny
             Principal: "*"
             Resource: !Sub arn:aws:s3:::${S3Bucket}

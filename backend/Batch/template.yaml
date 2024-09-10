@@ -21,15 +21,15 @@ Parameters:
 Mappings:
   EnvironmentMap:
     dev:
-      LINEChannelAccessTokenDBName: MembersCardChannelAccessTokenDBDev
-      EventBridgeName: MembersCardEventBridgeNameDev
-      LayerVersion: Layer LayerVersion
+      LINEChannelAccessTokenDBName: LineChannelAccessDBDev
+      EventBridgeName: LineEventBridgeDev
+      LayerVersion: 6
       LoggerLevel: DEBUG
     prod:
-      LINEChannelAccessTokenDBName: MembersCardChannelAccessTokenDBProd
-      EventBridgeName: MembersCardEventBridgeNameProd
-      LayerVersion: Layer LayerVersion
-      LoggerLevel: INFO or DEBUG
+      LINEChannelAccessTokenDBName: LineChannelAccessDBProd
+      EventBridgeName: LineEventBridgeProd
+      LayerVersion: 6
+      LoggerLevel: DEBUG
 
 Resources:
   LambdaRole:

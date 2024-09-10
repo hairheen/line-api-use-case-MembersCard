@@ -1,6 +1,6 @@
 // 環境設定を読み込む
-const API_GATEWAY_URL = "https://xxxxxxxxx.execute-api.ap-northeast-1.amazonaws.com/dev/members_card/";
-const liffId = "0000000000-XXXXXXXX"
+const API_GATEWAY_URL = "https://g5ymewc8l3.execute-api.ap-northeast-1.amazonaws.com/dev/members_card/";
+const liffId = "2006175866-5PDdy9xY"
 
 // 言語設定の定数宣言
 const defaultLang = "ja";
@@ -12,7 +12,7 @@ let lang = "";
 
 //多言語対応のメッセージ読み込み
 let message = {}
-$.getJSON("message.json", (data) =>{
+$.getJSON("message.json", (data) => {
   message = data;
 })
 
@@ -63,21 +63,30 @@ function initializeApp() {
   });
 
   if (!liff.isLoggedIn()) {
-    liff.login({redirectUri: location.href});
-  } else{
+    liff.login({ redirectUri: location.href });
+  } else {
     document.getElementById("liffAppContent").classList.remove("hidden");
+    // 获取并显示用户的名字和头像
+    liff.getProfile()
+      .then(profile => {
+        document.getElementById('user-name').textContent = profile.displayName;
+        document.getElementById('user-avatar').src = profile.pictureUrl;
+      })
+      .catch((err) => {
+        console.error('Error getting profile: ', err);
+      });
   }
 
   //言語設定のグローバル変数を上書き
   lang = getParam("lang") ? getParam("lang") : localStorage.getItem('locale');
-  if(supportedLangList.indexOf(lang) < 0){
+  if (supportedLangList.indexOf(lang) < 0) {
     lang = defaultLang;
   }
 
   //DynamoDBのデータを特定ユーザーのidTokenより取得
   idToken = liff.getIDToken();
   getUserData(idToken);
-  setTimeout(demoAddPoint, 10000);
+  // setTimeout(demoAddPoint, 10000);
 }
 
 /**
@@ -96,10 +105,18 @@ function getUserData(idToken) {
 
   request.onload = function () {
     if (request.readyState === 4 && request.status === 200) {
-      data = this.response;
-      displayBarcode(data.barcodeNum);
-      displayPoint(data.point);
-      displayExpirationDate(data.pointExpirationDate);
+      const data = this.response;
+
+      console.log('API response Get User Data:', data);
+
+      // 检查 data 是否为 null 或 undefined，以及是否包含 barcodeNum 属性
+      if (data && data.barcodeNum) {
+        displayBarcode(data.barcodeNum);
+        displayPoint(data.point);
+        displayExpirationDate(data.pointExpirationDate);
+      } else {
+        console.error('API response does not contain the expected data.');
+      }
     } else {
       console.warn(message.serverError[lang]);
     }
@@ -115,7 +132,7 @@ function getUserData(idToken) {
 function displayBarcode(barcodeNum) {
   $("#barcode-img").barcode(String(barcodeNum), "ean13", {
     barWidth: 2,
-    barHeight: 76,
+    barHeight: 64,
     fontSize: 14,
     output: "svg",
   });
@@ -155,13 +172,22 @@ function demoAddPoint() {
   request.onload = function () {
     if (request.readyState === 4 && request.status === 200) {
       alert(message.scanBarcode[lang]);
-      data = this.response;
-      displayPoint(data.point);
-      displayExpirationDate(data.pointExpirationDate);
-    } else if(request.status === 403) {
-      if(!alert(message.sessionExpired[lang])){
+      const data = this.response;
+
+      console.log('API response AddPoint:', data);
+
+      // 添加检查以确保 data 存在并包含预期的属性
+      if (data && data.point && data.pointExpirationDate) {
+        displayPoint(data.point);
+        displayExpirationDate(data.pointExpirationDate);
+      } else {
+        console.error('API response does not contain the expected data.');
+        alert('Failed to retrieve point data.');
+      }
+    } else if (request.status === 403) {
+      if (!alert(message.sessionExpired[lang])) {
         liff.logout();
-        liff.login({redirectUri: location.href});
+        liff.login({ redirectUri: location.href });
       }
     } else {
       alert(message.error[lang]);
@@ -175,7 +201,7 @@ function getParam(name, url) {
   if (!url) url = window.location.href;
   name = name.replace(/[\[\]]/g, "\\$&");
   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
+    results = regex.exec(url);
   if (!results) return null;
   if (!results[2]) return '';
   return decodeURIComponent(results[2].replace(/\+/g, " "));

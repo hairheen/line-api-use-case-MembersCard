@@ -74,7 +74,7 @@ def send_service_message(channel_access_token, notification_token, product_obj, 
         "btn1_url": "https://line.me",
         "discount": modified_product_obj['discount'] + '円',
         "quantity": "1点",
-        "shop_name": "Use Case STORE",
+        "shop_name": "お魚ダイニング三好",
         # "payment_fee": modifiedProductObj['fee'] + '円',
         "product_name": modified_product_obj['product_name'],
         # "delivery_cash": modifiedProductObj['postage'] + '円'
@@ -177,27 +177,66 @@ def make_flex_recept(date, product_name, product_price, postage,
                 "contents": [
                     {
                         "type": "text",
-                        "text": "Use Case STORE",
-                        "size": "xxl",
-                        "weight": "bold"
+                        "text": "お魚ダイニング三好",
+                        "size": "sm",
+                        "weight": "bold",
+                        "color": "#1282ee",
+                        "margin": "sm"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                            {
+                                "type": "text",
+                                "text": members_card_const.const.MESSAGE_THANKS[language],  # noqa: E501
+                                "wrap": True,
+                                "size": "lg",
+                                "color": "#1d1d1f",
+                                "weight": "bold",
+                                "margin": "sm"
+                            },
+                            {
+                                "type": "text",
+                                "text": members_card_const.const.MESSAGE_NOTICE[language],  # noqa: E501
+                                "wrap": True,
+                                "size": "sm",
+                                "color": "#6e6e73",
+                                "margin": "sm"
+                            }
+                        ]
                     },
                     {
                         "type": "text",
                         "text": date,
-                        "color": "#767676"
+                        "color": "#6e6e73",
+                        "margin": "sm",
+                        "size": "sm",
                     },
                     {
-                        "type": "text",
-                        "wrap": True,
-                        "text": members_card_const.const.MESSAGE_NOTES[language],  # noqa: E501
-                        "color": "#ff6347"
-                    }
+                        "type": "separator",
+                        "color": "#e6e6e6",
+                        "margin": "md",
+                    },
                 ]
             },
             "body": {
                 "type": "box",
                 "layout": "vertical",
                 "contents": [
+                    {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                            {
+                                "type": "image",
+                                "url": img_url,
+                                "size": "lg",
+                                "margin": "sm",
+                            },
+                        ],
+                        
+                    },
                     {
                         "type": "box",
                         "layout": "vertical",
@@ -212,7 +251,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                     {
                                         "type": "text",
                                         "text": product_name,
-                                        "color": "#5B5B5B",
+                                        "color": "#6e6e73",
                                         "size": "sm",
                                         "flex": 5
                                     },
@@ -220,7 +259,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                         "type": "text",
                                         "text": product_price,
                                         "wrap": True,
-                                        "color": "#666666",
+                                        "color": "#1d1d1f",
                                         "size": "sm",
                                         "flex": 2,
                                         "align": "end"
@@ -235,7 +274,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                     {
                                         "type": "text",
                                         "text": members_card_const.const.MESSAGE_POSTAGE[language],  # noqa: E501
-                                        "color": "#5B5B5B",
+                                        "color": "#6e6e73",
                                         "size": "sm",
                                         "flex": 5
                                     },
@@ -243,7 +282,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                         "type": "text",
                                         "text": postage,
                                         "wrap": True,
-                                        "color": "#666666",
+                                        "color": "#1d1d1f",
                                         "size": "sm",
                                         "flex": 2,
                                         "align": "end"
@@ -258,7 +297,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                     {
                                         "type": "text",
                                         "text": members_card_const.const.MESSAGE_FEE[language],  # noqa: E501
-                                        "color": "#5B5B5B",
+                                        "color": "#6e6e73",
                                         "size": "sm",
                                         "flex": 5
                                     },
@@ -266,7 +305,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                         "type": "text",
                                         "text": fee,
                                         "wrap": True,
-                                        "color": "#666666",
+                                        "color": "#1d1d1f",
                                         "size": "sm",
                                         "flex": 2,
                                         "align": "end"
@@ -281,7 +320,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                     {
                                         "type": "text",
                                         "text": members_card_const.const.MESSAGE_DISCOUNT[language],  # noqa: E501
-                                        "color": "#5B5B5B",
+                                        "color": "#6e6e73",
                                         "size": "sm",
                                         "flex": 5
                                     },
@@ -289,7 +328,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                         "type": "text",
                                         "text": discount,
                                         "wrap": True,
-                                        "color": "#666666",
+                                        "color": "#1d1d1f",
                                         "size": "sm",
                                         "flex": 2,
                                         "align": "end"
@@ -304,7 +343,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                     {
                                         "type": "text",
                                         "text": members_card_const.const.MESSAGE_SUBTOTAL[language],  # noqa: E501
-                                        "color": "#5B5B5B",
+                                        "color": "#6e6e73",
                                         "size": "sm",
                                         "flex": 5
                                     },
@@ -312,7 +351,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                         "type": "text",
                                         "text": subtotal,
                                         "wrap": True,
-                                        "color": "#666666",
+                                        "color": "#1d1d1f",
                                         "size": "sm",
                                         "flex": 2,
                                         "align": "end"
@@ -327,7 +366,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                     {
                                         "type": "text",
                                         "text": members_card_const.const.MESSAGE_TAX[language],  # noqa: E501
-                                        "color": "#5B5B5B",
+                                        "color": "#6e6e73",
                                         "size": "sm",
                                         "flex": 5
                                     },
@@ -335,7 +374,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                         "type": "text",
                                         "text": tax,
                                         "wrap": True,
-                                        "color": "#666666",
+                                        "color": "#1d1d1f",
                                         "size": "sm",
                                         "flex": 2,
                                         "align": "end"
@@ -350,7 +389,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                     {
                                         "type": "text",
                                         "text": members_card_const.const.MESSAGE_TOTAL[language],  # noqa: E501
-                                        "color": "#5B5B5B",
+                                        "color": "#6e6e73",
                                         "size": "sm",
                                         "flex": 5
                                     },
@@ -358,7 +397,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                         "type": "text",
                                         "text": total,
                                         "wrap": True,
-                                        "color": "#666666",
+                                        "color": "#1d1d1f",
                                         "size": "sm",
                                         "flex": 2,
                                         "align": "end"
@@ -373,7 +412,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                     {
                                         "type": "text",
                                         "text": members_card_const.const.MESSAGE_AWARD_POINTS[language],  # noqa: E501
-                                        "color": "#5B5B5B",
+                                        "color": "#6e6e73",
                                         "size": "sm",
                                         "flex": 5
                                     },
@@ -381,7 +420,7 @@ def make_flex_recept(date, product_name, product_price, postage,
                                         "type": "text",
                                         "text": point,
                                         "wrap": True,
-                                        "color": "#666666",
+                                        "color": "#1d1d1f",
                                         "size": "sm",
                                         "flex": 2,
                                         "align": "end"
@@ -389,40 +428,13 @@ def make_flex_recept(date, product_name, product_price, postage,
                                 ]
                             },
                         ],
-                        "paddingBottom": "xxl"
+                        "margin": "md",
                     },
-                    {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            {
-                                "type": "text",
-                                "text": members_card_const.const.MESSAGE_THANKS[language],  # noqa: E501
-                                "wrap": True,
-                                "size": "sm",
-                                "color": "#767676"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            {
-                                "type": "image",
-                                "url": img_url,
-                                "size": "lg"
-                            }
-                        ],
-                        "margin": "xxl"
-                    }
                 ],
-                "paddingTop": "0%"
             },
             "footer": {
                 "type": "box",
                 "layout": "vertical",
-                "spacing": "sm",
                 "contents": [
                     {
                         "type": "button",
@@ -433,14 +445,27 @@ def make_flex_recept(date, product_name, product_price, postage,
                             "label": members_card_const.const.MESSAGE_VIEW[language],  # noqa: E501
                             "uri": "https://liff.line.me/{liff_id}?lang={language}".format(liff_id=LIFF_ID, language=language)  # noqa: E501
                         },
-                        "color": "#0033cc"
+                        "color": "#0033cc",
+                        "margin": "md"
+                    },
+                    {
+                        "type": "separator",
+                        "color": "#e6e6e6",
+                        "margin": "md",
+                    },
+                    {
+                        "type": "text",
+                        "wrap": True,
+                        "text": members_card_const.const.MESSAGE_NOTES[language],  # noqa: E501
+                        "size": "sm",
+                        "color": "#fa514b",
+                        "margin": "md",
                     },
                     {
                         "type": "spacer",
                         "size": "md"
                     }
                 ],
-                "flex": 0
             }
         }
     }

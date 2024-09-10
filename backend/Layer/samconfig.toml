@@ -5,3 +5,9 @@ version = 0.1
 region = "ap-northeast-1"
 capabilities = "CAPABILITY_NAMED_IAM"
 parameter_overrides = "Environment=\"dev\""
+stack_name = "LineLayerStack"
+resolve_s3 = true
+s3_prefix = "LineLayerStack"
+confirm_changeset = true
+disable_rollback = true
+image_repositories = []

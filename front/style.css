@@ -1,26 +1,27 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.3;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "Noto Sans CJK JP", "Noto Sans JP", "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "游ゴシック", YuGothic, "メイリオ", Meiryo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 body {
   margin: 0;
   -webkit-text-size-adjust: 100%;
+  background-color: #e0e0e0;
 }
 
-div {
-  max-width: 100%;
-  text-align: center;
+main{
+  background-color: #fff;
 }
 
 p {
   margin: 0;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
 }
 
 .hidden {
@@ -30,6 +31,11 @@ a {
 /*共通部品*/
 .container {
   display: flex;
+  max-width: 750px;
+}
+
+.margin-center {
+  margin: 0 auto;
 }
 
 .justify-center {
@@ -49,107 +55,190 @@ main {
   display: flex;
   height: 100vh;
   flex-direction: column;
-  background-color: #f7f7f7;
+  max-width: 750px;
 }
 
-.member-info {
-  padding: 32px 0;
-  background-color: #7fca86;
+.store-info {
+  padding: 24px 0;
+  background-color: #e9e6e0;
   color: #dbffde;
-  border-bottom: 1px solid #dadada;
+  box-shadow: 0 3px 10px #1e1e1e11;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
-.member-info .store-name {
-  font-size: 22px;
+.store-info .store-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1d1d1f;
 }
 
 div.disclaimer {
-  font-size: 1em;
+  font-size: 14px;
   color: #fa514b;
-  margin: 4px 8px;
-  padding: 0px 4px;
+  margin-bottom: 8px;
   text-align: left;
   line-height: 1.4;
 }
 
-div.disclaimer.demo {
-  margin-top: 8px;
-}
-
 div.disclaimer.security {
-  color: #7c7c7c;
+  color: #6e6e73;
 }
 
 .align-center {
   text-align: center;
 }
 
-.barcode {
-  background-color: #ffffff;
-  border-top: 1px solid #dadada;
-  border-bottom: 1px solid #dadada;
-  margin-top: 4px;
+.member-card {
+  position: relative;
+  width: 94%;
+  max-width: 480px;
+  background-image: url("https://youjin.jp/wp/wp-content/themes/youjin_theme/images/object/12.png");
+  box-shadow: 0 4px 20px #1d1d1f2a;
+  margin-bottom: 24px;
+  border-radius: 12px 12px 13px 13px;
+  margin-top: 24px;
+}
+
+.member-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(6, 6, 27, 0.5);
+  z-index: 1;
+  border-radius: 12px 12px 13px 13px;
+}
+
+.member-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.member-card .card-body{
+  padding-bottom: 80px;
+}
+
+.member-card .card-body .logo-area {
+  padding: 12px;
+  /* border-bottom: 1px solid #ffffff75; */
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.member-card .card-body .logo-area img {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+
+.member-card .card-body .logo-area span{
+  color: #fff;
+}
+
+.member-card .card-bottom {
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.member-card .card-bottom .barcode {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 8px;
 }
 
 .barcode #barcode-img {
-  margin: 8px auto 0;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.point-info {
-  background-color: #ffffff;
-  margin-bottom: 2px;
+.barcode #barcode-img img {
+  overflow: auto;
+  width: 160px;
+}
+
+.member-info {
+  background-color: #f8f8f8;
+  border-radius: 12px;
+  width: 94%;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.member-info .user-info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.member-info .user-info img{
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  margin-right: 8px;
+}
+
+.member-info .user-info #user-name{
   font-weight: bold;
-  color: #c1c1c1;
-  border-top: 1px solid #dadada;
-}
-
-.point-info div {
-  margin-top: 8px;
-  margin-bottom: 8px;
-}
-
-.point-info .point {
-  color: #49b052;
-  font-weight: bold;
-}
-
-.point-info .point .point-num {
-  font-size: 32px;
-}
-
-.point-info .point .point-title {
-  font-size: 18px;
-  vertical-align: super;
-}
-
-.point-info .expiration .expiration-title {
-  color: #49b052;
   font-size: 16px;
+}
+
+.member-info .point {
+  color: #1d1d1f;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.member-info .point div{
+  display: flex;
+  align-items: baseline;
+}
+
+.member-info .point .point-num {
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.member-info .point .point-title {
+  font-size: 14px;
+  vertical-align: baseline;
+}
+
+.member-info .expiration .expiration-title {
+  color: #ffffffd0;
+  font-size: 12px;
   font-weight: bold;
 }
 
-.point-info .expiration .expiration-date {
-  color: #49b052;
-  font-size: 20px;
+.member-info .expiration .expiration-date {
+  color: #ffffffd0;
+  font-size: 12px;
 }
 
 .other-info {
+  width: 94%;
   background-color: #ffffff;
   height: 100%;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #dadada;
 }
 
 /*footer部*/
 footer {
   width: 100%;
-  height: 120px;
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translate(-50%, -16px);
   text-align: center;
-  background-color: #f7f7f7;
-  border-top: 3px solid #f7f7f7;
 }
 
 footer a {
@@ -174,11 +263,11 @@ footer a {
 }
 
 .register {
-  height: 50%;
+  width: 100%;
 }
 
 .register .border-right {
-  border-right: thin solid #01e031;
+  border-right: thin solid #071e52;
 }
 
 .register a {
@@ -188,11 +277,15 @@ footer a {
 .register div {
   width: 100%;
   height: 100%;
-  background-color: #00b927;
+  background-color: #163a7d;
   color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 94%;
+  padding: 16px 0;
+  border-radius: 12px;
+  margin: 0 auto;
 }
 
 .register .m-text {

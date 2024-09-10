@@ -21,10 +21,11 @@ Parameters:
 Mappings:
   EnvironmentMap:
     dev:
-      LayerName: LINE-USECASE-MEMBERSCARD-LAYER-DEV
+      LayerName: LineLayer
+      LoggerLevel: DEBUG
     prod:
-      LayerName: LINE-USECASE-MEMBERSCARD-LAYER-PROD
-
+      LayerName: LineLayerProd
+      LoggerLevel: DEBUG
 Resources:
   UseCaseLayerDev:
     Type: AWS::Serverless::LayerVersion

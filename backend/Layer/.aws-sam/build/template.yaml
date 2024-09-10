@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'LINE-UseCase-Layer-Sample
+
+  '
+Globals:
+  Function:
+    Timeout: 30
+Parameters:
+  Environment:
+    Type: String
+    AllowedValues:
+    - dev
+    - sample
+    - prod
+    Default: dev
+Mappings:
+  EnvironmentMap:
+    dev:
+      LayerName: LineLayer
+      LoggerLevel: DEBUG
+    prod:
+      LayerName: LineLayerProd
+      LoggerLevel: DEBUG
+Resources:
+  UseCaseLayerDev:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      CompatibleRuntimes:
+      - python3.8
+      ContentUri: UseCaseLayerDev
+      Description: LambdaLayer
+      LayerName:
+        Fn::FindInMap:
+        - EnvironmentMap
+        - Ref: Environment
+        - LayerName
+    Metadata:
+      BuildMethod: python3.8
+      SamResourceId: UseCaseLayerDev
+Outputs:
+  UseCaseLayerDev:
+    Description: UseCaseLayerDev Layer ARN
+    Value:
+      Ref: UseCaseLayerDev
+  UseCaseLayerName:
+    Description: UseCaseLayerDev Layer Name
+    Value:
+      Fn::FindInMap:
+      - EnvironmentMap
+      - Ref: Environment
+      - LayerName
+    Export:
+      Name: MembersCardLayerDev
